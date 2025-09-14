@@ -1,0 +1,43 @@
+CREATE DATABASE myntra;
+USE myntra;
+
+CREATE TABLE sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_name VARCHAR(100),
+    pants_description VARCHAR(255),
+    price DECIMAL(10,2),
+    MRP DECIMAL(10,2),
+    discount_percent DECIMAL(4,2),
+    ratings DECIMAL(3,1),
+    number_of_ratings INT
+);
+
+SELECT * 
+FROM sales
+LIMIT 10;
+
+SELECT COUNT(*) AS total_products
+FROM sales;
+
+SELECT DISTINCT brand_name
+FROM sales;
+
+SELECT brand_name, COUNT(*) AS total_products
+FROM sales
+GROUP BY brand_name
+ORDER BY total_products DESC;
+
+SELECT brand_name, ROUND(AVG(price), 2) AS avg_price
+FROM sales
+GROUP BY brand_name
+ORDER BY avg_price DESC;
+
+SELECT brand_name, pants_description, ratings, number_of_ratings
+FROM sales
+ORDER BY ratings DESC, number_of_ratings DESC
+LIMIT 10;
+
+SELECT brand_name, ROUND(AVG(discount_percent)*100,2) AS avg_discount_percent
+FROM sales
+GROUP BY brand_name
+ORDER BY avg_discount_percent DESC;
